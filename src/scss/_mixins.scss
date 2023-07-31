@@ -1,0 +1,15 @@
+@import './variables.scss';
+
+@mixin flex-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin jost-400 {
+  font-family: Jost;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

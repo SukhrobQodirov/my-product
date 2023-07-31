@@ -1,0 +1,33 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  @include jost-400;
+  color: $accent-paraghrap-color;
+  background-color: slateblue;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style-type: none;
+}
+
+img {
+  display: inline-block;
+}
+
+.container {
+  width: 1130px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
