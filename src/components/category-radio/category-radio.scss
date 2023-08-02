@@ -1,0 +1,13 @@
+@import '../../scss/variables';
+
+.category-radio {
+  padding: 5px 16px;
+  border-radius: 10px;
+  background: #F2F4FF;;
+  cursor: pointer;
+  transition: .5s linear all;
+  &-active {
+    color: #FFFFFF;
+    background-color: $accent-blue;
+  }
+}

@@ -1,0 +1,14 @@
+.category-filter {
+  width: 100%;
+  margin-top: 24px;
+  padding: 24px;
+  border-radius: 10px;
+  background: #fff;
+  border: none;
+
+  &__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 8px;
+  }
+}

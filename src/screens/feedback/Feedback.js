@@ -1,16 +1,21 @@
-import Logo from '../../assets/img/logo.svg';
+import Container from "../../components/container/container";
+import Header from "../../components/header/header";
+import HomeFilter from "../../components/home-filter/home-filter";
+import MainBody from "../../components/main-body/main-body";
 
 function Feedback() {
   return (
-    <header id="header">
-      <div className="container header__container">
-        <a className="header__logo" href="/">
-          <img className="header__logo-img" src={Logo} alt="Website Logo" width={24} height={24} />
-        </a>
-        <p>6 Suggestions</p>
-      </div>
-    </header>
-  )
+    <main id="main">
+      <Container className="main__container">
+        <HomeFilter />
+
+        <div className="main-body">
+          <Header/>
+          <MainBody/>
+        </div>
+      </Container>
+    </main>
+  );
 }
 
-export default Feedback
+export default Feedback;

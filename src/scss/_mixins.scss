@@ -1,4 +1,4 @@
-@import './variables.scss';
+@import "./variables.scss";
 
 @mixin flex-display {
   display: flex;
@@ -12,4 +12,29 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+@mixin jost-500 {
+  font-family: Jost;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+@mixin jost-600 {
+  font-family: Jost;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+@mixin jost-700 {
+  font-family: Jost;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.25px;
 }
