@@ -1,0 +1,11 @@
+@import "../../scss/mixins";
+
+.add-feedback-btn {
+  @include jost-700;
+  padding: 12px 25px;
+  font-size: 14px;
+  color: #F2F4FE;
+  background: #ad1fea;
+  border-radius: 10px;
+  border: none;
+}
