@@ -1,0 +1,44 @@
+@import "../../scss/mixins";
+
+.card {
+  margin-top: 24px;
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  column-gap: 40px;
+  background: #fff;
+  border-radius: 10px;
+
+  &__btn {
+    @include flex-display;
+    flex-direction: column;
+    row-gap: 8px;
+    padding: 14px 9px 8px;    
+    color: #3a4374;
+    background: #f2f4fe;
+    text-align: center;
+    font-family: Jost;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.181px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  &__title {
+    margin-bottom: 4px;
+  }
+
+  &__desc {
+    margin-bottom: 12px;
+  }
+
+  &__comments {
+    @include flex-display;
+    column-gap: 8px;
+    margin-left: auto;
+  }
+}

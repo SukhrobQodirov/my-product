@@ -1,8 +1,8 @@
 import Container from "../../components/container/container";
 import Header from "../../components/header/header";
 import HomeFilter from "../../components/home-filter/home-filter";
-import MainBody from "../../components/main-body/main-body";
 import './feedback.scss';
+import CardsList from "../../components/cards-list/cards-list";
 
 function Feedback() {
   return (
@@ -12,7 +12,7 @@ function Feedback() {
 
         <div className="main-body">
           <Header/>
-          <MainBody/>
+          <CardsList/>
         </div>
       </Container>
     </main>
