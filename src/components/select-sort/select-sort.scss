@@ -1,0 +1,28 @@
+@import "../../scss/mixins";
+
+.select-sort {
+  @include flex-display;
+  column-gap: 9px;
+
+  &__by-name {
+    color: #f2f4febf;
+  }
+
+  &__text {
+    @include jost-700;
+    font-size: 14px;
+    color: #f2f4fe;
+  }
+
+  &__dropdown {
+    @include flex-display;
+    column-gap: 9px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  &__list {
+    display: none;
+  }
+}

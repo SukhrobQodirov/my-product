@@ -1,0 +1,12 @@
+@import '../../scss/mixins';
+
+.main__container {
+  @include flex-display;
+  align-items: flex-start;
+  column-gap: 30px;
+}
+
+.main-body {
+  width: 825px;
+  overflow: hidden;
+}

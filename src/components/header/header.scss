@@ -1,0 +1,20 @@
+@import '../../scss/mixins';
+
+#header {
+  @include flex-display;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 16px 14px 24px;
+  border-radius: 10px;
+  background: #373f68;
+}
+
+.header__inner {
+  @include flex-display;
+  column-gap: 16px;
+}
+
+.header__title {
+  @include jost-700;
+  color: #FFFFFF;
+}

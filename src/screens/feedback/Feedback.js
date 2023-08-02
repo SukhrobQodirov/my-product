@@ -2,6 +2,7 @@ import Container from "../../components/container/container";
 import Header from "../../components/header/header";
 import HomeFilter from "../../components/home-filter/home-filter";
 import MainBody from "../../components/main-body/main-body";
+import './feedback.scss';
 
 function Feedback() {
   return (
