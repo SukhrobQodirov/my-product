@@ -1,0 +1,25 @@
+@import "../../scss/mixins";
+
+.not-found {
+  @include flex-display;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100vh - (72px + 94px + 24px + 129px));
+  margin-top: 24px;
+  border-radius: 10px;
+  background: #fff;
+
+  &__content {
+    max-width: 410px;
+    margin-top: 53px;
+    text-align: center;
+  }
+
+  &__title {
+    margin-bottom: 16px;
+  }
+
+  &__subtitle {
+    margin-bottom: 48px;
+  }
+}

@@ -2,6 +2,7 @@
 
 .add-feedback-btn {
   @include jost-700;
+  display: inline-block;
   padding: 12px 25px;
   font-size: 14px;
   color: #F2F4FE;

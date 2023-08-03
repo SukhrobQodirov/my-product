@@ -4,6 +4,7 @@ import HomeFilter from "../../components/home-filter/home-filter";
 import './feedback.scss';
 import CardsList from "../../components/cards-list/cards-list";
 import { useEffect, useState } from "react";
+import NotFound from "../../components/not-found/not-found";
 
 function Feedback() {
 
@@ -39,6 +40,7 @@ function Feedback() {
         <div className="main-body">
           <Header/>
           <CardsList data={data.productRequests}/>
+          {/* <NotFound/> */}
         </div>
       </Container>
     </main>
