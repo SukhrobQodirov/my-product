@@ -13,7 +13,8 @@
     @include flex-display;
     flex-direction: column;
     row-gap: 8px;
-    padding: 14px 9px 8px;    
+    width: 40px;
+    padding: 14px 9px 8px;
     color: #3a4374;
     background: #f2f4fe;
     text-align: center;
@@ -26,6 +27,16 @@
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    transition: .3s linear all;
+
+    &--clicked {
+      color: #fff;
+      background: #4661e6;
+    }
+
+    &:hover {
+      background: #CFD7FF;
+    }
   }
 
   &__title {

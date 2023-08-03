@@ -1,19 +1,14 @@
 import Card from "../card/card";
 import './cards-list.scss';
 
-function CardsList() {
+function CardsList({data}) {
   return(
     <ul className="cards-list">
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
+      {data.map(feedback => {
+        return(
+          <Card data={feedback} />
+        )
+      })}
     </ul>
   )
 }

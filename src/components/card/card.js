@@ -1,28 +1,38 @@
 import CategoryRadio from "../category-radio/category-radio";
-import DropUp from "../../assets/img/drop-up-blue.svg";
+import DropUpBlue from "../../assets/img/drop-up-blue.svg";
+import DropUpLight from "../../assets/img/drop-up.svg";
 import Comments from "../../assets/img/comments-icon.svg";
 import "./card.scss";
 
-function Card({ className = "", ...props }) {
+function Card({ className = "", data, ...props }) {
+  const {
+    id,
+    title,
+    category,
+    upvotes,
+    status,
+    description,
+    isLiked,
+    comments,
+  } = data;
+
   return (
-    <li className={`card ${className}`}>
-      <button className="card__btn">
+    <li className={`card ${className}`} data-id={id}>
+      <button className={`card__btn ${isLiked?'card__btn--clicked':''}`}>
         <img
-          src={DropUp}
+          src={isLiked ? DropUpLight : DropUpBlue}
           alt="drop up"
           className="card__btn-img"
           width={"10"}
           height={"6"}
         />
-        112
+        {upvotes}
       </button>
 
       <div className="card__content">
-        <h2 className="card__title">Add tags for solutions</h2>
-        <p className="card__desc">
-          Easier to search for solutions based on a specific stack.
-        </p>
-        <CategoryRadio>Enhancement</CategoryRadio>
+        <h2 className="card__title">{title}</h2>
+        <p className="card__desc">{description}</p>
+        <CategoryRadio>{category}</CategoryRadio>
       </div>
       <div className="card__comments">
         <img
@@ -32,7 +42,9 @@ function Card({ className = "", ...props }) {
           width={"18"}
           height={"16"}
         />
-        <span className="card__comments-count">2</span>
+        <span className="card__comments-count">
+          {comments ? comments.length : 0}
+        </span>
       </div>
     </li>
   );
