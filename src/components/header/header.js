@@ -15,7 +15,7 @@ function Header() {
         <SelectSort/>
       </div>
       <div className="header__inner">
-        <AddFeedbackBtn to='/' className="header__btn" />
+        <AddFeedbackBtn to='/add-feedback' className="header__btn" />
       </div>
     </header>
   );

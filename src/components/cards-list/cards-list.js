@@ -6,7 +6,7 @@ function CardsList({data}) {
     <ul className="cards-list">
       {data.map(feedback => {
         return(
-          <Card data={feedback} />
+          <Card data={feedback} key={feedback.id} />
         )
       })}
     </ul>

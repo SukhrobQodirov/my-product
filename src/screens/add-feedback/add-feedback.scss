@@ -1,0 +1,130 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+
+.add-feedback {
+  width: 540px;
+  margin: 0 auto;
+
+  &__link {
+    @include flex-display;
+    @include jost-700;
+    display: inline-flex;
+    column-gap: 16px;
+    font-size: 14px;
+    color: #647196;
+  }
+
+  &__form {
+    margin-top: 68px;
+    padding: 52px 42px 40px;
+    border-radius: 10px;
+    color: #647196;
+    background: #fff;
+    position: relative;
+
+    &::before {
+      @include flex-display;
+      content: "+";
+      width: 56px;
+      height: 56px;
+      font-size: 28px;
+      line-height: 1;
+      text-align: center;
+      color: #fff;
+      background: $accent-gradient;
+      border-radius: 50%;
+      position: absolute;
+      top: -28px;
+      left: 42px;
+    }
+
+    &-title,
+    &-category,
+    &-category-select,
+    &-details {
+      display: block;
+      margin-bottom: 24px;
+    }
+
+    & span {
+      @include jost-700;
+      display: block;
+      color: #3a4374;
+      font-size: 14px;
+    }
+
+    & label {
+      font-size: 14px;
+    }
+
+    &-box {
+      border: none;
+    }
+
+    &-legend {
+      @include jost-700;
+      margin-bottom: 24px;
+      color: #3a4374;
+      font-size: 24px;
+    }
+
+    &-category {
+      &--list {
+        display: none;
+      }
+
+      &-inner {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+      }
+    }
+
+    &-input,
+    &-textarea {
+      @include jost-400;
+      width: 100%;
+      height: 48px;
+      margin-top: 16px;
+      padding: 12px 24px;
+      display: block;
+      color: #3a4374;
+      background: #f7f8fd;
+      border: none;
+      border-radius: 5px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    &-textarea {
+      height: 96px;
+    }
+
+    &-buttons {
+      @include flex-display;
+      width: 100%;
+      justify-content: flex-end;
+      column-gap: 16px;
+    }
+
+    &-btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+
+      &--gray {
+        color: #fff;
+        background: #656ea3;
+      }
+
+      &--slateblue {
+        color: #fff;
+        background: #c75af6;
+      }
+    }
+  }
+}
