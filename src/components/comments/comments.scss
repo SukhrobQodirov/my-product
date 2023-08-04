@@ -1,0 +1,29 @@
+@import "../../scss/mixins";
+
+.comments {
+  width: 100%;
+  margin: 24px 0;
+  padding: 24px 32px 48px;
+  background: #fff;
+  border-radius: 10px;
+
+  &__title {
+    @include jost-700;
+    margin-bottom: 28px;
+    color: #3a4374;
+  }
+
+  &__list {
+    & .comment {
+      &:last-child {
+        border-bottom: none;
+
+        &__reply {
+          &:last-child {
+            padding-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}

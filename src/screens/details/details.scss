@@ -1,0 +1,19 @@
+@import '../../scss/mixins';
+
+.details {
+  width: 730px;
+  margin: 0 auto;
+
+  &__header {
+    @include flex-display;
+    justify-content: space-between;
+
+    &-link {
+      @include flex-display;
+      @include jost-700;
+      column-gap: 16px;
+      font-size: 14px;
+      color: #647196;
+    }
+  }
+}

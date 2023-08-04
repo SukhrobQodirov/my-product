@@ -3,6 +3,7 @@ import DropUpBlue from "../../assets/img/drop-up-blue.svg";
 import DropUpLight from "../../assets/img/drop-up.svg";
 import Comments from "../../assets/img/comments-icon.svg";
 import "./card.scss";
+import { Link } from "react-router-dom";
 
 function Card({ className = "", data, ...props }) {
   const {
@@ -18,7 +19,7 @@ function Card({ className = "", data, ...props }) {
 
   return (
     <li className={`card ${className}`} data-id={id}>
-      <button className={`card__btn ${isLiked?'card__btn--clicked':''}`}>
+      <button className={`card__btn ${isLiked ? "card__btn--clicked" : ""}`}>
         <img
           src={isLiked ? DropUpLight : DropUpBlue}
           alt="drop up"
@@ -30,7 +31,9 @@ function Card({ className = "", data, ...props }) {
       </button>
 
       <div className="card__content">
-        <h2 className="card__title">{title}</h2>
+        <h2 className="card__title">
+          <Link to={`/feedback/${id}`}>{title}</Link>
+        </h2>
         <p className="card__desc">{description}</p>
         <CategoryRadio>{category}</CategoryRadio>
       </div>
