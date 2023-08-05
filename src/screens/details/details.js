@@ -1,11 +1,11 @@
 import { Link, useParams } from "react-router-dom";
 import DropLeft from "../../assets/img/drop-left.svg";
-import EditFeedbackBtn from "../../components/edit-feedback-btn/edit-feedback-btn";
 import Card from "../../components/card/card";
 import "./details.scss";
 import { useEffect, useState } from "react";
 import Comments from "../../components/comments/comments";
 import AddComment from "../../components/add-comment/add-comment";
+import AddFeedbackBtn from "../../components/add-feedback-btn/add-feedback-btn";
 
 function Details() {
   const feedbackId = useParams().id;
@@ -41,7 +41,7 @@ function Details() {
   return (
     <div className="details">
       <div className="details__header">
-        <Link className="details__header-link" to={"/"}>
+        <Link className="details__header-link" to={`/`}>
           <img
             className="details__header-link--icon"
             src={DropLeft}
@@ -51,7 +51,8 @@ function Details() {
           />
           Go Back
         </Link>
-        <EditFeedbackBtn />
+        {/* <EditFeedbackBtn to={`/edit-feedback/${feedbackId}`} /> */}
+        <AddFeedbackBtn path={`/edit-feedback/${feedbackId}`} className="add-feedback-btn--success" textContent="Edit Feedback" />
       </div>
       <Card data={currentFeedback} />
       {commentsArr?<Comments comments={commentsArr} />:null}

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import DropLeft from "../../assets/img/drop-left.svg";
 import DropBottom from "../../assets/img/drop-bottom.svg";
-import "./add-feedback.scss";
 import FilterBox from "../../components/filter-box/filter-box";
+import "./add-feedback.scss";
 
 function AddFeedback() {
   return (

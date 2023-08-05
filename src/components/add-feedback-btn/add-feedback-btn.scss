@@ -9,4 +9,17 @@
   background: #ad1fea;
   border-radius: 10px;
   border: none;
+  cursor: pointer;
+
+  &--gray {
+    background: #3A4374;
+  }
+
+  &--success {
+    background: #4661E6;
+  }
+
+  &--danger {
+    background: #D73737;
+  }
 }
