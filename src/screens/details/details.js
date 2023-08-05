@@ -5,6 +5,7 @@ import Card from "../../components/card/card";
 import "./details.scss";
 import { useEffect, useState } from "react";
 import Comments from "../../components/comments/comments";
+import AddComment from "../../components/add-comment/add-comment";
 
 function Details() {
   const feedbackId = useParams().id;
@@ -54,6 +55,7 @@ function Details() {
       </div>
       <Card data={currentFeedback} />
       {commentsArr?<Comments comments={commentsArr} />:null}
+      <AddComment className={'details__add-comment'}/>
     </div>
   );
 }

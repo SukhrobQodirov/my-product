@@ -2,7 +2,7 @@
 
 .details {
   width: 730px;
-  margin: 0 auto;
+  margin: 129px auto;
 
   &__header {
     @include flex-display;
@@ -15,5 +15,9 @@
       font-size: 14px;
       color: #647196;
     }
+  }
+
+  &__add-comment {
+    margin-top: 24px;
   }
 }

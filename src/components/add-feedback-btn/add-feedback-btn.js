@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import './add-feedback-btn.scss';
 
-function AddFeedbackBtn({path, className="", ...props}) {
+function AddFeedbackBtn({path, className="", textContent='+ Add Feedback', ...props}) {
   return(
     <Link to={path} className={`add-feedback-btn ${className}`} {...props}>
-      + Add Feedback
+      {textContent}
     </Link>
   )
 }
