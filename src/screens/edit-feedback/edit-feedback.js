@@ -11,11 +11,8 @@ function EditFeedback({ ...props }) {
 
   const [data, setData] = useState();
   const [isFetched, setFetched] = useState(false);
-  // const [titleValue, setTitleValue] = useState('');
-
-  // function handleChangeInputValue(evt) {
-  //   setTitleValue(`${titleValue} ${evt.target.value}`);
-  // }
+  const [titleValue, setTitleValue] = useState('');
+  const [description, setDescription] = useState('');
 
   useEffect(() => {
     if (!isFetched) {
@@ -38,19 +35,18 @@ function EditFeedback({ ...props }) {
     return null;
   }
 
-
-
-
-
-
   const currentFeedback = data.productRequests.find((feedback) => {
-    return +feedback.id === +feedbackId;
+    if(+feedback.id === +feedbackId) {
+      if(titleValue === '') {
+        setTitleValue(feedback.title);
+      }
+      if(description === '') {
+        setDescription(feedback.description)
+      }
+      return feedback;
+    }
   });
   const commentsArr = currentFeedback.comments;
-
-  // setTitleValue(currentFeedback.title);
-
-  // console.log(titleValue);
 
   return (
     <div className="edit-feedback" {...props}>
@@ -73,6 +69,8 @@ function EditFeedback({ ...props }) {
               className="edit-feedback__form-input"
               type="text"
               placeholder="Please add a dark theme option"
+              value={titleValue}
+              onChange={evt => setTitleValue(evt.target.value)}
             />
           </label>
 
@@ -134,7 +132,7 @@ function EditFeedback({ ...props }) {
             </span>
             Include any specific comments on what should be improved, added,
             etc.
-            <textarea className="edit-feedback__form-textarea" value={currentFeedback.description} />
+            <textarea className="edit-feedback__form-textarea" value={description} onChange={evt => setDescription(evt.target.value)} />
           </label>
 
           <div className="edit-feedback__form-buttons">
