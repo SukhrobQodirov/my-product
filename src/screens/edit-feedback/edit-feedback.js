@@ -1,55 +1,61 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import DropLeft from "../../assets/img/drop-left.svg";
 import DropBottom from "../../assets/img/drop-bottom.svg";
 import FilterBox from "../../components/filter-box/filter-box";
-import "./edit-feedback.scss";
 import { useEffect, useState } from "react";
+import { feedbacksActions } from "../../store/feedbacks/feedbacks.slice";
+import { useDispatch, useSelector } from "react-redux";
+import "./edit-feedback.scss";
 
 function EditFeedback({ ...props }) {
   const feedbackId = useParams().id;
   const path = `/feedback/${feedbackId}`;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const [data, setData] = useState();
-  const [isFetched, setFetched] = useState(false);
   const [titleValue, setTitleValue] = useState('');
   const [description, setDescription] = useState('');
 
+  const { feedbacksList, loading } = useSelector((state) => state.feedbacks)
+
   useEffect(() => {
-    if (!isFetched) {
-      setFetched(true);
-      fetch("/data.json")
-        .then((res) => res.json())
-        .then((data) => {
-          setData({
-            ...data,
-            productRequests: data.productRequests.map((product) => ({
-              ...product,
-              isLiked: false,
-            })),
-          });
-        });
+    if (!feedbacksList) {
+      dispatch(feedbacksActions.setLoading())
+      fetch('/data.json')
+        .then(res => res.json())
+        .then(data => {
+          dispatch(feedbacksActions.setFeedbacksList(data.productRequests));
+        })
+        .catch(err => {
+          dispatch(feedbacksActions.setError(err))
+        })
     }
-  }, [isFetched]);
+  }, []);
 
-  if (!data) {
-    return null;
-  }
-
-  const currentFeedback = data.productRequests.find((feedback) => {
-    if(+feedback.id === +feedbackId) {
-      if(titleValue === '') {
+  const currentFeedback = feedbacksList?.find((feedback) => {
+    if (+feedback.id === +feedbackId) {
+      if (titleValue === '') {
         setTitleValue(feedback.title);
       }
-      if(description === '') {
+      if (description === '') {
         setDescription(feedback.description)
       }
       return feedback;
     }
   });
-  const commentsArr = currentFeedback.comments;
+
+  function handleBtnClick(evt) {
+    evt.preventDefault();
+    const element = evt.target;
+
+    if (element.className.includes('edit-feedback__form-btn--danger')) {
+      dispatch(feedbacksActions.deleteFeedbacksItem(feedbackId));
+      navigate('/');
+    }
+  }
 
   return (
-    <div className="edit-feedback" {...props}>
+    <div className="edit-feedback" onClick={handleBtnClick} {...props}>
       <Link to={path} className="edit-feedback__link">
         <img src={DropLeft} alt="drop left icon" width={"14"} height={"10"} />
         Go Back
@@ -57,7 +63,7 @@ function EditFeedback({ ...props }) {
       <form className="edit-feedback__form">
         <FilterBox className={"edit-feedback__form-box"}>
           <legend className="edit-feedback__form-legend">
-            {currentFeedback.title}
+            {currentFeedback?.title}
           </legend>
 
           <label className="edit-feedback__form-title">
