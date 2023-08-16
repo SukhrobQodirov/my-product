@@ -41,8 +41,6 @@
     }
 
     &-title,
-    &-category,
-    &-category-select,
     &-details,
     &-status,
     &-status-select {
@@ -57,7 +55,8 @@
       font-size: 14px;
     }
 
-    & label, &-category--title, &-status--title {
+    & label,
+    &-status--title {
       font-size: 14px;
     }
 
@@ -70,19 +69,6 @@
       margin-bottom: 75px;
       color: #3a4374;
       font-size: 24px;
-    }
-
-    &-category {
-      &--list {
-        display: none;
-      }
-
-      &-inner {
-        display: flex !important;
-        align-items: center;
-        justify-content: space-between;
-        cursor: pointer;
-      }
     }
 
     &-status {
@@ -131,11 +117,11 @@
       border-radius: 10px;
       border: none;
       cursor: pointer;
-    
+
       &--gray {
         background: #3A4374;
       }
-    
+
       &--danger {
         background: #D73737;
       }
@@ -152,4 +138,9 @@
       }
     }
   }
+}
+
+.categories-selector,
+.status-selector {
+  margin-bottom: 24px;
 }

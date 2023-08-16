@@ -1,11 +1,53 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
 import DropLeft from "../../assets/img/drop-left.svg";
-import DropBottom from "../../assets/img/drop-bottom.svg";
 import FilterBox from "../../components/filter-box/filter-box";
-import { useEffect, useState } from "react";
+import Selector from "../../components/selector/selector";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import { feedbacksActions } from "../../store/feedbacks/feedbacks.slice";
 import { useDispatch, useSelector } from "react-redux";
 import "./edit-feedback.scss";
+
+export const Categories = [
+  {
+    id: 1,
+    name: 'Features',
+  },
+  {
+    id: 2,
+    name: 'UI',
+  },
+  {
+    id: 3,
+    name: 'UX',
+  },
+  {
+    id: 4,
+    name: 'Enhancement',
+  },
+  {
+    id: 5,
+    name: 'Bug',
+  },
+]
+
+export const Status = [
+  {
+    id: 1,
+    name: 'Suggestion',
+  },
+  {
+    id: 2,
+    name: 'Planned',
+  },
+  {
+    id: 3,
+    name: 'In-Progress',
+  },
+  {
+    id: 4,
+    name: 'Live',
+  }
+]
 
 function EditFeedback({ ...props }) {
   const feedbackId = useParams().id;
@@ -13,10 +55,7 @@ function EditFeedback({ ...props }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [titleValue, setTitleValue] = useState('');
-  const [description, setDescription] = useState('');
-
-  const { feedbacksList, loading } = useSelector((state) => state.feedbacks)
+  const { feedbacksList, loading, currentCategory, currentStatus } = useSelector((state) => state.feedbacks)
 
   useEffect(() => {
     if (!feedbacksList) {
@@ -34,15 +73,23 @@ function EditFeedback({ ...props }) {
 
   const currentFeedback = feedbacksList?.find((feedback) => {
     if (+feedback.id === +feedbackId) {
-      if (titleValue === '') {
-        setTitleValue(feedback.title);
-      }
-      if (description === '') {
-        setDescription(feedback.description)
-      }
       return feedback;
     }
   });
+
+  const [titleValue, setTitleValue] = useState('');
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState("Features");
+  const [status, setStatus] = useState("Planned");
+
+  useEffect(() => {
+    if (currentFeedback) {
+      setTitleValue(currentFeedback.title);
+      setDescription(currentFeedback.description);
+      setCategory(currentFeedback.category);
+      setStatus(currentFeedback.status);
+    }
+  }, [currentFeedback])
 
   function handleBtnClick(evt) {
     evt.preventDefault();
@@ -51,7 +98,33 @@ function EditFeedback({ ...props }) {
     if (element.className.includes('edit-feedback__form-btn--danger')) {
       dispatch(feedbacksActions.deleteFeedbacksItem(feedbackId));
       navigate('/');
+    } else if (element.className.includes('edit-feedback__btn')) {
+      const newObj = {
+        ...currentFeedback,
+        title: titleValue,
+        description: description,
+        category: currentCategory,
+        status: currentStatus,
+      }
+      dispatch(feedbacksActions.editFeedback(newObj))
+      navigate('/');
+    } else if (element.className.includes('edit-feedback__form-btn--gray')) {
+      navigate('/');
     }
+  }
+
+  const categorySelectParams = {
+    title: "Category",
+    subtitle: "Choose a category for your feedback",
+    currentValue: category,
+    arr: Categories.slice(),
+  }
+
+  const statusSelectParams = {
+    title: "Update Status",
+    subtitle: "Change feedback state",
+    currentValue: status,
+    arr: Status.slice(),
   }
 
   return (
@@ -80,57 +153,9 @@ function EditFeedback({ ...props }) {
             />
           </label>
 
-          <div className="edit-feedback__form-category-select">
-            <span className="edit-feedback__form-category-title">Category</span>
-            <p className="edit-feedback__form-category--title">
-              Choose a category for your feedback
-            </p>
-            <div className="edit-feedback__form-input edit-feedback__form-category-inner">
-              Feature
-              <img
-                className="edit-feedback__form-drop-bottom"
-                src={DropBottom}
-                alt="drop bottom icon"
-                width={"14"}
-                height={"10"}
-              />
-            </div>
-            <ul className="edit-feedback__form-category--list">
-              <li className="edit-feedback__form-category--item">Feature</li>
-              <li className="edit-feedback__form-category--item">UI</li>
-              <li className="edit-feedback__form-category--item">UX</li>
-              <li className="edit-feedback__form-category--item">
-                Enhancement
-              </li>
-              <li className="edit-feedback__form-category--item">Bug</li>
-            </ul>
-          </div>
+          <Selector className={'categories-selector'} selectParams={categorySelectParams} />
 
-          <div className="edit-feedback__form-status">
-            <span className="edit-feedback__form-status--title">
-              Update Status
-            </span>
-            <p className="edit-feedback__form-status--title">
-              Change feedback state
-            </p>
-            <div className="edit-feedback__form-input edit-feedback__form-status-inner">
-              Planned
-              <img
-                className="edit-feedback__form-drop-bottom"
-                src={DropBottom}
-                alt="drop bottom icon"
-                width={"14"}
-                height={"10"}
-              />
-            </div>
-            <ul className="edit-feedback__form-status--list">
-              <li className="edit-feedback__form-status--item">Feature</li>
-              <li className="edit-feedback__form-status--item">UI</li>
-              <li className="edit-feedback__form-status--item">UX</li>
-              <li className="edit-feedback__form-status--item">Enhancement</li>
-              <li className="edit-feedback__form-status--item">Bug</li>
-            </ul>
-          </div>
+          <Selector className={'status-selector'} selectParams={statusSelectParams} />
 
           <label className="edit-feedback__form-details">
             <span className="edit-feedback__form-details--span">
@@ -145,7 +170,7 @@ function EditFeedback({ ...props }) {
             <button className="edit-feedback__form-btn edit-feedback__form-btn--danger">Delete</button>
             <div className="edit-feedback__form-buttons--inner">
               <button className="edit-feedback__form-btn edit-feedback__form-btn--gray">Cancel</button>
-              <button className="edit-feedback__form-btn">Add Feedback</button>
+              <button className="edit-feedback__form-btn edit-feedback__btn">Edit Feedback</button>
             </div>
           </div>
         </FilterBox>
