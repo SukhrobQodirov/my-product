@@ -118,6 +118,7 @@ function EditFeedback({ ...props }) {
     subtitle: "Choose a category for your feedback",
     currentValue: category,
     arr: Categories.slice(),
+    selectorType: 'category',
   }
 
   const statusSelectParams = {
@@ -125,6 +126,7 @@ function EditFeedback({ ...props }) {
     subtitle: "Change feedback state",
     currentValue: status,
     arr: Status.slice(),
+    selectorType: 'status',
   }
 
   return (

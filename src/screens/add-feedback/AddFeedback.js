@@ -68,6 +68,7 @@ function AddFeedback() {
     subtitle: "Choose a category for your feedback",
     currentValue: category,
     arr: Categories.slice(),
+    selectorType: 'category',
   }
 
   function handleAddBtnClicked(evt) {

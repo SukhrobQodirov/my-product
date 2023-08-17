@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { feedbacksActions } from "../../store/feedbacks/feedbacks.slice";
 
 function Selector({ selectParams, className }) {
-    const { title, subtitle, currentValue, arr } = selectParams;
+    const { title, subtitle, currentValue, arr, selectorType } = selectParams;
     const { currentStatus, currentCategory } = useSelector((state) => state.feedbacks)
     const [isSelectClicked, setSelectClicked] = useState(false);
     const [categoryType, setCategoryType] = useState(currentValue.toLowerCase());
@@ -14,8 +14,11 @@ function Selector({ selectParams, className }) {
 
     function handleSelectorClicked(evt) {
         const element = evt.target;
-        dispatch(feedbacksActions.setCategory(element.textContent.toLowerCase()));
-        dispatch(feedbacksActions.setStatus(element.textContent.toLowerCase()));
+        if (selectorType === 'status') {
+            dispatch(feedbacksActions.setStatus(element.textContent.toLowerCase()));
+        } else if (selectorType === 'category') {
+            dispatch(feedbacksActions.setCategory(element.textContent.toLowerCase()));
+        }
         setCategoryType(element.textContent.toLowerCase());
         setSelectClicked(!isSelectClicked);
     }
