@@ -6,37 +6,33 @@ import { useEffect, useState } from "react";
 import Comments from "../../components/comments/comments";
 import AddComment from "../../components/add-comment/add-comment";
 import AddFeedbackBtn from "../../components/add-feedback-btn/add-feedback-btn";
+import { useDispatch, useSelector } from "react-redux";
+import { feedbacksActions } from "../../store/feedbacks/feedbacks.slice";
 
 function Details() {
+  const dispatch = useDispatch();
   const feedbackId = useParams().id;
-  const [data, setData] = useState();
-  const [isFetched, setFetched] = useState(false);
+  const { feedbacksList, currentCategory } = useSelector((state) => state.feedbacks)
 
   useEffect(() => {
-    if (!isFetched) {
-      setFetched(true);
-      fetch("/data.json")
-        .then((res) => res.json())
-        .then((data) => {
-          setData({
-            ...data,
-            productRequests: data.productRequests.map((product) => ({
-              ...product,
-              isLiked: false,
-            })),
-          });
-        });
+    if (!feedbacksList) {
+      dispatch(feedbacksActions.setLoading())
+      fetch('/data.json')
+        .then(res => res.json())
+        .then(data => {
+          dispatch(feedbacksActions.setFeedbacksList(data.productRequests));
+        })
+        .catch(err => {
+          dispatch(feedbacksActions.setError(err))
+        })
     }
-  }, [isFetched]);
+  }, []);
 
-  if (!data) {
-    return null;
-  }
-
-  const currentFeedback = data.productRequests.find((feedback) => {
+  const currentFeedback = feedbacksList.find((feedback) => {
     return +feedback.id === +feedbackId;
   });
-  const commentsArr = currentFeedback.comments;
+
+  const commentsArr = currentFeedback.comments? currentFeedback.comments : [];
 
   return (
     <div className="details">
@@ -55,7 +51,7 @@ function Details() {
         <AddFeedbackBtn path={`/edit-feedback/${feedbackId}`} className="add-feedback-btn--success" textContent="Edit Feedback" />
       </div>
       <Card data={currentFeedback} />
-      {commentsArr?<Comments comments={commentsArr} />:null}
+      {commentsArr !== []?<Comments comments={commentsArr} />:null}
       <AddComment className={'details__add-comment'}/>
     </div>
   );

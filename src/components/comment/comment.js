@@ -23,7 +23,7 @@ function Comment({comment, ...props}) {
       </div>
       <ul className="comment__replies">
         {comment.replies ? comment.replies.map(reply => {
-          return <ReplyCard className="comment__reply" data={reply}/> 
+          return <ReplyCard key={reply.id} className="comment__reply" data={reply}/> 
         }) : null}
       </ul>
     </li>

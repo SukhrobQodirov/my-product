@@ -8,32 +8,33 @@ import { feedbacksActions } from "../../store/feedbacks/feedbacks.slice";
 function Selector({ selectParams, className }) {
     const { title, subtitle, currentValue, arr } = selectParams;
     const { currentStatus, currentCategory } = useSelector((state) => state.feedbacks)
-    const [isCategoryClicked, setCategoryClicked] = useState(false);
+    const [isSelectClicked, setSelectClicked] = useState(false);
     const [categoryType, setCategoryType] = useState(currentValue.toLowerCase());
     const dispatch = useDispatch();
 
     function handleSelectorClicked(evt) {
         const element = evt.target;
         dispatch(feedbacksActions.setCategory(element.textContent.toLowerCase()));
+        dispatch(feedbacksActions.setStatus(element.textContent.toLowerCase()));
         setCategoryType(element.textContent.toLowerCase());
-        setCategoryClicked(!isCategoryClicked);
+        setSelectClicked(!isSelectClicked);
     }
 
     return (
         <div className={"selector " + className} data-value={categoryType}>
             <span className="selector__title">{title}</span>
             <p className="selector__subtitle">{subtitle}</p>
-            <div className="selector__input-inner" onClick={() => setCategoryClicked(!isCategoryClicked)}>
+            <div className="selector__input-inner" onClick={() => setSelectClicked(!isSelectClicked)}>
                 {categoryType.length > 2 ? categoryType.charAt(0).toUpperCase() + categoryType.slice(1) : categoryType.toUpperCase()}
                 <img
                     className="selector__input-inner--icon"
-                    src={isCategoryClicked ? DropUp : DropBottom}
+                    src={isSelectClicked ? DropUp : DropBottom}
                     alt="drop bottom icon"
                     width={"14"}
                     height={"10"}
                 />
             </div>
-            <ul className={`selector__list selector__list${isCategoryClicked ? "--opened" : "--closed"}`} onClick={handleSelectorClicked}>
+            <ul className={`selector__list selector__list${isSelectClicked ? "--opened" : "--closed"}`} onClick={handleSelectorClicked}>
                 {
                     arr.map(category => {
                         return (
